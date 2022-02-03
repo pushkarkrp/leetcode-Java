@@ -1,34 +1,27 @@
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> list = new ArrayList<>();
-    if (s == null || s.length() == 0 || p == null || p.length() == 0) return list;
-    
-    int[] hash = new int[256];
-    for (char c : p.toCharArray()) {
-        hash[c]++;
-    }
-    int left = 0, right = 0, count = p.length();
-    
-    while (right < s.length()) {
-        if (hash[s.charAt(right)] >= 1) {
-            count--;
-        }
-        hash[s.charAt(right)]--;
-        right++;
+        Map<Character, Integer> pCount = new HashMap<>();
+        Map<Character, Integer> sCount = new HashMap<>();
         
-        if (count == 0) {
-            list.add(left);
+        for (Character ch : p.toCharArray()) {
+            pCount.put(ch, pCount.getOrDefault(ch, 0) + 1);
         }
-        if (right - left == p.length() ) {
-           
-            if (hash[s.charAt(left)] >= 0) {
-                count++;
+        List<Integer> result = new ArrayList<>();
+        int l = 0;
+        for (int i = 0; i < s.length(); i++) {
+            Character ch = s.charAt(i);
+            sCount.put(ch, sCount.getOrDefault(ch, 0) + 1);
+            if(i - l + 1 == p.length()) {
+                if(pCount.equals(sCount)) {
+                    result.add(l);   
+                }
+                sCount.put(s.charAt(l), sCount.getOrDefault(s.charAt(l), 0) - 1);
+                if(sCount.get(s.charAt(l)) == 0) {
+                    sCount.remove(s.charAt(l));
+                }
+                l++;
             }
-            hash[s.charAt(left)]++;
-            left++;
-        
         }
-    }
-        return list;
+        return result;
     }
 }
