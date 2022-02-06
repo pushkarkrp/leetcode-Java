@@ -8,17 +8,15 @@ class Solution {
             if (prev == nums[i]) {
                 count++;
                 if (count > 2) {
-                    count++;
                     continue;
                 }
                 nums[l] = nums[i];
-                l++;
             } else if (prev != nums[i]) {
                 nums[l] = nums[i];
-                l++;
                 count = 1;
                 prev = nums[i];
             }
+            l++;
             k++;
         }
         return k;
