@@ -1,16 +1,10 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        Map<Character, Integer> map = new HashMap<>();
-        for (Character ch : t.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        char result = t.charAt(0);
+        for (int i = 1; i < t.length(); i++) {
+            result ^= s.charAt(i-1);
+            result ^= t.charAt(i);
         }
-        for (Character ch : s.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) - 1);
-            if(map.get(ch) == 0) map.remove(ch);
-        }
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            if(entry.getValue() == 1) return entry.getKey();
-        }
-        return '0';
+        return result;
     }
 }
