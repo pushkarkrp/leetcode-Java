@@ -6,8 +6,9 @@ class Solution {
         int result = 0;
         for (int num : nums) {
             prefix += num;
-            if(map.containsKey(prefix - k)) {
-                result += map.get(prefix - k);
+            int diff = prefix - k;
+            if(map.containsKey(diff)) {
+                result += map.get(diff);
             }
             map.put(prefix, map.getOrDefault(prefix, 0) + 1);
         }
