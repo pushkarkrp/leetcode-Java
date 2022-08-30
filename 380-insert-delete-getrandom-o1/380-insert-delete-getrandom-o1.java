@@ -26,13 +26,13 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        /*int size = list.size();
-        int randomIndex = (int) Math.random() * (size);
-        return list.get(randomIndex);*/
-        int max = list.size();
+        int size = list.size();
+        int randomIndex = (int) (Math.random() * (size));
+        return list.get(randomIndex);
+        /*int max = list.size();
         int min = 0;
         int ind = (int)(Math.random() * (max - min) + min);
-        return list.get(ind);
+        return list.get(ind);*/
     }
 }
 
